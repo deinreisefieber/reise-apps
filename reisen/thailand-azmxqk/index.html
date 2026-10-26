@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Thailand-Inselhopping</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Thailand-Inselhopping">
+<meta name="theme-color" content="#0b7a8f">
+<style>
+:root{
+  --bg:#edf2f5; --card:#fff; --text:#0f2231; --muted:#5d7080; --line:#e1e8ee; --soft:#f2f6f9;
+  --accent:#0e7c86; --accent-soft:#e3f4f4; --ok:#1f9d63; --ok-soft:#e5f6ee; --warn:#b85c0a; --warn-soft:#fff1e2; --bad:#c0352b; --bad-soft:#fdecea;
+  --shadow:0 1px 2px rgba(15,34,49,.05), 0 10px 30px rgba(15,34,49,.07); --radius:18px;
+  --g-anreise:linear-gradient(135deg,#3b1f5e,#6a3fa0 55%,#9b6fd1); --g-abreise:var(--g-anreise);
+  --g-hotel:linear-gradient(135deg,#0b4f6c,#0e7c86 55%,#23a6a0); --g-frei:var(--g-hotel); --g-rundreise:linear-gradient(135deg,#7a3e12,#c2692a 55%,#e3a04f);
+  --g-hafen:var(--g-hotel); --g-see:linear-gradient(135deg,#0a2a4a,#12508a 55%,#2a7fc4); --g-vor:linear-gradient(135deg,#1f2d3a,#38506a 55%,#5f7d99);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0c1820; --card:#13232e; --text:#e6eef3; --muted:#93a8b6; --line:#22384a; --soft:#182c39; --accent:#2fb5ae; --accent-soft:#163a3d;
+    --ok:#4cc98d; --ok-soft:#173528; --warn:#f0a35a; --warn-soft:#3a2a17; --bad:#ef6b5f; --bad-soft:#3a1d1b; --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.25); }
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-text-size-adjust:100%}
+a{color:var(--accent)}
+.wrap{max-width:60rem;margin:0 auto;padding:0 16px calc(28px + env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 0 10px}
+header h1{margin:0;font-size:1.15rem;font-weight:650;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto}
+.tabs button{all:unset;cursor:pointer;white-space:nowrap;padding:7px 14px;border-radius:999px;background:var(--card);box-shadow:var(--shadow);font-size:.9rem;font-weight:550}
+.tabs button[aria-selected=true]{background:var(--accent);color:#fff}
+.nav{display:flex;gap:6px;margin-bottom:12px;align-items:center}
+.nav button{all:unset;cursor:pointer;padding:8px 12px;border-radius:12px;background:var(--card);box-shadow:var(--shadow);font-size:.9rem}
+.nav .primary{background:var(--accent);color:#fff}
+.nav input{margin-left:auto;font:inherit;font-size:16px;padding:6px 8px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text)}
+.hero{color:#fff;border-radius:var(--radius);padding:18px;margin-bottom:14px;background:var(--g-hotel);box-shadow:var(--shadow);overflow-wrap:anywhere}
+.hero .label{font-size:.82rem;opacity:.85}
+.hero h2{margin:2px 0 0;font-size:1.6rem;font-weight:650;letter-spacing:-.01em}
+.hero .meta{opacity:.9;font-size:.9rem}
+.hero .highlight{margin-top:10px;padding:8px 12px;border-radius:12px;background:rgba(255,255,255,.16);font-weight:550}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.8rem;white-space:nowrap;flex-shrink:0;background:var(--soft);color:var(--text)}
+.hero .badge{background:rgba(255,255,255,.18);color:#fff}
+.hero .badge.alle{background:#fff;color:#0b4f6c;font-weight:600}
+.badge.ok{background:var(--ok-soft);color:var(--ok)} .badge.warn{background:var(--warn-soft);color:var(--warn)} .badge.bad{background:var(--bad-soft);color:var(--bad)}
+.chip{all:unset;cursor:pointer;display:inline-block;padding:4px 10px;border-radius:999px;font-size:.82rem;background:rgba(255,255,255,.18);color:inherit}
+.card .chip{background:var(--accent-soft);color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:14px}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;min-width:0;overflow-wrap:anywhere}
+.card.full{grid-column:1/-1}
+.card h3{margin:0 0 10px;font-size:1rem;font-weight:620;display:flex;align-items:center;gap:8px}
+.card h3 .count{margin-left:auto;font-size:.78rem;font-weight:500;color:var(--muted)}
+.note{font-size:.8rem;color:var(--muted)}
+ul.facts{margin:0;padding-left:1.1em} ul.facts li{margin:3px 0}
+ul.check{list-style:none;margin:0;padding:0}
+ul.check li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--line)}
+ul.check li:last-child{border-bottom:0}
+ul.check li>div,ul.check li>span{min-width:0}
+ul.check input{width:20px;height:20px;margin:1px 0 0;flex:none;accent-color:var(--ok)}
+ul.check li.done span{color:var(--muted);text-decoration:line-through}
+ul.check .del{all:unset;cursor:pointer;margin-left:auto;color:var(--muted);padding:0 4px}
+form.add{display:flex;gap:6px;margin-top:8px}
+form.add input{flex:1;min-width:0;font:inherit;font-size:16px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--soft);color:var(--text)}
+form.add button{all:unset;cursor:pointer;padding:0 14px;border-radius:10px;background:var(--accent);color:#fff;font-weight:600}
+.trip{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;padding:10px 0;border-bottom:1px solid var(--line)}
+.trip:last-child{border-bottom:0}
+.trip .qr{all:unset;cursor:pointer;display:block;width:96px;height:96px;border-radius:10px;background:#fff center/contain no-repeat}
+.qr-add{all:unset;cursor:pointer;width:96px;height:96px;display:grid;place-content:center;text-align:center;font-size:.72rem;color:var(--muted);border:1.5px dashed var(--line);border-radius:10px;padding:6px;box-sizing:border-box}
+.trip-title{font-weight:620}
+.trip .badge{white-space:normal}
+.er{padding:10px 0;border-bottom:1px solid var(--line)} .er:last-child{border-bottom:0}
+.er .land{font-weight:620}
+.gal{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+.sight{flex:0 0 min(78%,17rem);scroll-snap-align:start;background:var(--soft);border-radius:14px;overflow:hidden}
+.sight .ph{height:140px;background:var(--line) center/cover no-repeat;position:relative}
+.sight .star,.sight .dist{position:absolute;font-size:.72rem;padding:2px 8px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff}
+.sight .star{top:8px;left:8px} .sight .dist{bottom:8px;left:8px}
+.sight .bd{padding:10px}
+.sight .nm{font-weight:620}
+.wx{display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:16px;color:#fff;background:linear-gradient(135deg,#f59e0b,#f97316 55%,#e8553a)}
+.wx.wolken{background:linear-gradient(135deg,#526477,#7b8ea3 55%,#a3b3c4)} .wx.regen{background:linear-gradient(135deg,#1e3a8a,#2563eb 55%,#38a3e0)}
+.wx.gewitter{background:linear-gradient(135deg,#2e1f63,#4c2a91 55%,#6f45c0)}
+.wx-ic{font-size:3.4rem;line-height:1;filter:drop-shadow(0 4px 10px rgba(0,0,0,.18))}
+.wx-t{font-size:2.6rem;font-weight:700;line-height:1;letter-spacing:-.02em} .wx-t small{font-size:1.25rem;font-weight:500;opacity:.8;margin-left:4px}
+.wx-txt{margin-top:4px;font-weight:560;opacity:.95}
+.wx-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.wx-stat{background:var(--soft);border-radius:12px;padding:9px 6px;text-align:center}
+.wx-stat b{display:block;font-size:1.05rem;font-weight:650} .wx-stat span{font-size:.72rem;color:var(--muted)}
+.wx-stat.ok b{color:var(--ok)} .wx-stat.warn b{color:var(--warn)} .wx-stat.bad b{color:var(--bad)}
+.wx-bar{height:4px;border-radius:2px;background:var(--line);margin:5px 8px 0;overflow:hidden} .wx-bar i{display:block;height:100%;background:#3b82f6;border-radius:2px}
+.trip .qrs{display:grid;grid-template-columns:repeat(2,58px);gap:6px}
+.trip .qrs .qr{width:58px;height:58px;position:relative}
+.qr-n{position:absolute;right:2px;bottom:2px;font-size:.62rem;padding:0 4px;border-radius:6px;background:rgba(15,34,49,.75);color:#fff}
+.kids{margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--accent-soft)}
+.kids b{display:block;margin-bottom:2px}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+td,th{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.78rem;color:var(--muted);font-weight:550}
+tr.row{cursor:pointer} tr.today td{background:var(--accent-soft)}
+.kontakt .chip{margin:6px 6px 0 0}
+.login{max-width:22rem;margin:14vh auto 0;text-align:center}
+.login input{width:100%;font:inherit;font-size:1.1rem;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);margin:14px 0 10px;text-align:center}
+.login button{all:unset;cursor:pointer;display:block;width:100%;padding:12px 0;border-radius:12px;background:var(--accent);color:#fff;font-weight:600}
+.err{color:var(--bad)}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:10;display:flex;flex-direction:column;padding:calc(10px + env(safe-area-inset-top)) 10px calc(10px + env(safe-area-inset-bottom))}
+.overlay .leiste{display:flex;gap:8px;justify-content:flex-end;margin-bottom:8px}
+.overlay .leiste button{all:unset;cursor:pointer;padding:8px 14px;border-radius:999px;background:#fff;color:#0f2231;font-weight:600}
+.overlay .inhalt{flex:1;min-height:0;display:grid;place-items:center}
+.overlay img{max-width:100%;max-height:100%;object-fit:contain;background:#fff;border-radius:14px}
+.overlay iframe{width:100%;height:100%;border:0;border-radius:10px;background:#fff}
+.toast{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--text);color:var(--bg);padding:9px 16px;border-radius:999px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20}
+.toast.show{opacity:1}
+.demo{background:var(--warn-soft);color:var(--warn);border-radius:12px;padding:8px 12px;font-size:.85rem;margin-bottom:12px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1 id="titel">Meine Reise</h1></header>
+
+  <form class="card login" id="login" hidden>
+    <h3 style="justify-content:center">🔒 Passwort</h3>
+    <div class="note">Das Passwort hast du von deinem Reisebüro bekommen. Tipp fürs iPhone: erst über Teilen → „Zum Home-Bildschirm“ hinzufügen und dann dort anmelden.</div>
+    <input type="text" id="pw" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="xxxx-xxxx-xxxx">
+    <button type="submit">Öffnen</button>
+    <p class="err" id="pw-err" hidden>Passwort stimmt nicht.</p>
+  </form>
+  <p class="err" id="ladefehler" hidden>Die Reisedaten konnten nicht geladen werden. Bitte mit Internet erneut öffnen.</p>
+
+  <div id="app" hidden>
+    <div class="demo" id="demo" hidden>Beispielreise: alle Namen, Nummern und Hotels sind erfunden.</div>
+    <div class="tabs" role="tablist">
+      <button role="tab" data-tab="tag" aria-selected="true">Tag</button>
+      <button role="tab" data-tab="plan" aria-selected="false">Reiseplan</button>
+      <button role="tab" data-tab="unterlagen" aria-selected="false">Unterlagen</button>
+    </div>
+
+    <section id="view-tag">
+      <div class="nav">
+        <button id="prev" aria-label="Vorheriger Termin">‹</button>
+        <button id="heute" class="primary">Heute</button>
+        <button id="next" aria-label="Nächster Termin">›</button>
+        <input type="date" id="pick" aria-label="Datum wählen">
+      </div>
+      <div class="hero" id="hero"></div>
+      <div class="grid">
+        <div class="card full" id="c-ausflug" hidden><h3>🎟 Gebucht</h3><div id="ausflug"></div></div>
+        <div class="card full" id="c-einreise" hidden><h3>🛂 Jetzt erledigen <span class="count" id="n-einreise"></span></h3><div id="einreise"></div></div>
+        <div class="card" id="c-vorb" hidden><h3>🧳 Vor der Reise <span class="count" id="n-vorb"></span></h3><ul class="check" id="vorb"></ul></div>
+        <div class="card" id="c-ort" hidden><h3 id="ort-titel">🏨 Unterkunft &amp; Weg</h3><div id="ort"></div></div>
+        <div class="card" id="c-wetter"><h3>🌤 Wetter</h3><div id="wetter"></div></div>
+        <div class="card full" id="c-sights" hidden><h3 id="sights-titel">🗺 Sehenswürdigkeiten</h3><div class="gal" id="gal"></div>
+          <ul class="facts" id="tipps" style="margin-top:10px"></ul><div class="note" id="sights-note"></div></div>
+        <div class="card" id="c-notizen"><h3>📝 Meine Notizen <span class="count" id="n-notizen"></span></h3>
+          <ul class="check" id="notizen"></ul>
+          <form class="add" id="f-add"><input id="i-add" placeholder="Eigene Notiz für diesen Tag …"><button>+</button></form></div>
+        <div class="card" id="c-kontakt-tag" hidden><h3>☎️ Dein Reisebüro</h3><div class="kontakt" id="kontakt-tag"></div></div>
+      </div>
+    </section>
+
+    <section id="view-plan" hidden>
+      <div class="card"><table><thead><tr><th>Datum</th><th>Ort</th><th>Übernachtung</th></tr></thead><tbody id="plan"></tbody></table></div>
+    </section>
+
+    <section id="view-unterlagen" hidden>
+      <div class="grid">
+        <div class="card full" id="u-kontakt-card"><h3>☎️ Dein Reisebüro</h3><div class="kontakt" id="u-kontakt"></div></div>
+        <div class="card" id="u-buchungen-card"><h3>🎫 Buchungsnummern</h3><div class="note" style="margin-bottom:6px">Antippen zum Kopieren.</div><div class="badges" id="u-buchungen"></div></div>
+        <div class="card" id="u-notfall-card"><h3>🆘 Notfall</h3><ul class="facts" id="u-notfall"></ul></div>
+        <div class="card full" id="u-ausflug-card"><h3>🎟 Alle Ausflüge &amp; Tickets</h3><div id="u-ausflug"></div></div>
+        <div class="card full" id="u-einreise-card"><h3>🛂 Einreise &amp; Formulare</h3><div id="u-einreise"></div></div>
+        <div class="card full" id="u-vorb-card"><h3>🧳 Checkliste vor der Reise</h3><ul class="check" id="u-vorb"></ul></div>
+      </div>
+    </section>
+  </div>
+</div>
+<div class="overlay" id="overlay" hidden>
+  <div class="leiste"><button id="ov-teilen" hidden>Sichern / Teilen</button><button id="ov-zu">Schließen</button></div>
+  <div class="inhalt" id="ov-inhalt"></div>
+</div>
+<input type="file" id="tix-file" accept="image/*" hidden>
+<div class="toast" id="toast"></div>
+
+<script>
+// ---------- Hilfen ----------
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const url = (u) => (/^(https?:|tel:|mailto:)/i.test(String(u || '')) ? esc(u) : '#');
+const pad = (n) => String(n).padStart(2, '0');
+const isoHeute = () => { const d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); };
+const tagNr = (iso) => Math.round(Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10)) / 864e5);
+const isoAus = (nr) => new Date(nr * 864e5).toISOString().slice(0, 10);
+const plus = (iso, n) => isoAus(tagNr(iso) + n);
+const diff = (a, b) => tagNr(b) - tagNr(a);
+const ddmm = (iso) => esc(String(iso).slice(8, 10) + '.' + String(iso).slice(5, 7) + '.');
+const lang = (iso) => new Date(iso + 'T12:00:00').toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long' });
+const kurz = (iso) => new Date(iso + 'T12:00:00').toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: '2-digit' });
+// Gespeichertes je Reise trennen: alle Reisen liegen unter derselben Adresse
+const PREFIX = 'reise:' + location.pathname.replace(/index\.html$/, '') + ':';
+const store = {
+  get(k, def) { try { const v = localStorage.getItem(PREFIX + k); return v == null ? def : JSON.parse(v); } catch (e) { return def; } },
+  set(k, v) { try { localStorage.setItem(PREFIX + k, JSON.stringify(v)); return true; } catch (e) { return false; } },
+  del(k) { try { localStorage.removeItem(PREFIX + k); } catch (e) {} },
+};
+function toast(t) { const el = $('toast'); el.textContent = t; el.classList.add('show'); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 2400); }
+function kopieren(t) { (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => toast('Kopiert: ' + t), () => toast(t)); }
+
+// ---------- Entschlüsseln (AES-256-CBC, PBKDF2-SHA256) ----------
+function b64(s) { const bin = atob(s), out = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i); return out; }
+async function entschluesselnRoh(h, pw) {
+  const basis = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey({ name: 'PBKDF2', salt: b64(h.salt), iterations: h.iter, hash: 'SHA-256' }, basis, { name: 'AES-CBC', length: 256 }, false, ['decrypt']);
+  return crypto.subtle.decrypt({ name: 'AES-CBC', iv: b64(h.iv) }, key, b64(h.daten));
+}
+const entschluesseln = async (h, pw) => JSON.parse(new TextDecoder().decode(await entschluesselnRoh(h, pw)));
+// Tippfehler abfangen: Großbuchstaben, fehlende oder andere Trennzeichen
+function pwNorm(p) { const s = p.toLowerCase().replace(/[^a-z0-9]/g, ''); return s.length === 12 ? s.slice(0, 4) + '-' + s.slice(4, 8) + '-' + s.slice(8) : p.trim(); }
+
+// ---------- Voucher: online nur verschlüsselt unter unterlagen/<sha256 des Dateinamens>.enc ----------
+let PW = null;
+async function voucherPfad(pfad) {
+  const name = pfad.split('/').pop();
+  const h = new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(name)));
+  return 'unterlagen/' + [...h.slice(0, 8)].map((b) => b.toString(16).padStart(2, '0')).join('') + '.enc';
+}
+const TYPEN = { pdf: 'application/pdf', jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', heic: 'image/heic' };
+async function voucherDatei(pfad) {
+  const name = pfad.split('/').pop(), typ = TYPEN[name.split('.').pop().toLowerCase()] || 'application/octet-stream';
+  if (!PW) { const res = await fetch(pfad); return new File([await res.blob()], name, { type: typ }); }
+  const h = await (await fetch(await voucherPfad(pfad))).json();
+  return new File([await entschluesselnRoh(h, PW)], name, { type: typ });
+}
+let ovUrl = null, ovDatei = null;
+function overlay(inhalt, datei) {
+  $('ov-inhalt').replaceChildren(inhalt); ovDatei = datei || null;
+  $('ov-teilen').hidden = !(datei && navigator.canShare && navigator.canShare({ files: [datei] }));
+  $('overlay').hidden = false;
+}
+$('ov-zu').onclick = () => { $('overlay').hidden = true; $('ov-inhalt').replaceChildren(); if (ovUrl) URL.revokeObjectURL(ovUrl); ovUrl = null; };
+$('ov-teilen').onclick = () => ovDatei && navigator.share({ files: [ovDatei] }).catch(() => {});
+async function voucherZeigen(pfad) {
+  try {
+    const f = await voucherDatei(pfad);
+    ovUrl = URL.createObjectURL(f);
+    const el = document.createElement(f.type.startsWith('image/') ? 'img' : 'iframe');
+    el.src = ovUrl; el.title = 'Voucher';
+    overlay(el, f);
+  } catch (e) { toast('Voucher konnte nicht geladen werden – einmal mit Internet öffnen'); }
+}
+
+// ---------- Reisedaten ----------
+let R, TAGE = [], START, ENDE, cur;
+let erledigt = store.get('erledigt', {}), notizen = store.get('notizen', {}), tickets = store.get('tickets', {}), wx = store.get('wetter', {}), bilder = store.get('bilder2', {});
+
+function vorbereiten(r) {
+  R = r;
+  // Einträge mit von/bis auf einzelne Tage verteilen
+  TAGE = [];
+  for (const t of r.tage || []) {
+    const von = t.datum || t.von, bis = t.datum || t.bis || von;
+    for (let d = von; d <= bis; d = plus(d, 1)) TAGE.push({ ...t, d, ersterTag: d === von, letzterTag: d === bis });
+  }
+  TAGE.sort((a, b) => (a.d < b.d ? -1 : 1));
+  START = TAGE[0].d; ENDE = TAGE[TAGE.length - 1].d;
+  document.title = r.titel; $('titel').textContent = r.titel;
+  $('demo').hidden = !r.beispiel;
+}
+const tagFuer = (d) => TAGE.find((t) => t.d === d);
+const ausflugTag = (t) => (t.ausfluege || []).filter((a) => !a.datum || a.datum === t.d);
+// Lücken im Reiseplan: Ort des letzten Tags davor
+const ortFuer = (d) => tagFuer(d) || [...TAGE].reverse().find((t) => t.d < d) || TAGE[0];
+
+// ---------- Tagesansicht ----------
+const TYP = { anreise: '✈️ Anreise', abreise: '🏠 Abreise', hotel: '🏨 Aufenthalt', rundreise: '🚗 Rundreise-Etappe', hafen: '⚓ Hafentag', see: '🌊 Seetag', frei: '☀️ Freier Tag' };
+
+function heroHtml() {
+  const t = tagFuer(cur), badges = [];
+  let label, ort, meta, typ;
+  if (cur < START || cur > ENDE) {
+    const n = diff(isoHeute(), START), vor = cur < START;
+    typ = 'vor';
+    label = vor ? (n > 0 ? `Noch ${n} ${n === 1 ? 'Tag' : 'Tage'} bis zur Reise` : 'Vor der Reise') : 'Willkommen zurück!';
+    ort = vor ? 'Vorfreude' : 'Schön, dass ihr wieder da seid';
+    meta = vor ? `Reise ${ddmm(START)}–${ddmm(ENDE)} · ${esc(R.untertitel || '')}` : 'Wie war eure Reise? Wir freuen uns über eure Rückmeldung.';
+  } else {
+    const o = t || ortFuer(cur);
+    typ = t ? t.typ : 'frei';
+    // Abflugtag mit Nachtflug (Anreise ohne Unterkunft) zählt nicht mit: Tag 1 ist der Ankunftstag
+    const z = TAGE[0].typ === 'anreise' && !TAGE[0].unterkunft && TAGE.length > 1 ? TAGE.find((x) => x.d > START).d : START;
+    label = cur < z ? `${TYP[typ] || ''} · Abflug` : `Tag ${diff(z, cur) + 1} von ${diff(z, ENDE) + 1} · ${TYP[typ] || ''}`;
+    ort = o.ort; meta = `${esc(o.land || '')} · ${lang(cur)}`;
+    const h = t && t.hafen;
+    if (h && (h.an || h.ab)) {
+      badges.push(`<span class="badge">🕐 ${[h.an ? 'an ' + esc(h.an) : '', h.ab ? 'ab ' + esc(h.ab) : ''].filter(Boolean).join(' · ')}${h.tender ? ' · Tender' : ''}</span>`);
+      if (/^\d\d:\d\d$/.test(h.ab || '')) {
+        const [hh, mm] = h.ab.split(':').map(Number), m = (((hh * 60 + mm - (h.alleAnBord ?? 30)) % 1440) + 1440) % 1440;
+        badges.push(`<span class="badge alle">🚢 Alle an Bord ca. ${pad(Math.floor(m / 60))}:${pad(m % 60)}</span>`);
+      }
+    }
+    // Check-out am Morgen nach der letzten Nacht, Check-in am ersten Tag
+    const vt = tagFuer(plus(cur, -1)), vu = vt && vt.letzterTag && vt.unterkunft, u = t && t.unterkunft;
+    if (vu && vu.checkout && !(u && u.name === vu.name)) badges.push(`<span class="badge">🧳 Check-out ${esc(vu.name)} ${esc(vu.checkout)}</span>`);
+    if (u && u.checkin && t.ersterTag && !(vt && vt.unterkunft && vt.unterkunft.name === u.name)) badges.push(`<span class="badge">🛎 Check-in ${esc(u.checkin)}</span>`);
+    if (t) ausflugTag(t).forEach((a) => badges.push(`<span class="badge">🎟 ${esc(a.zeit || '')} ${esc(a.titel.split(':')[0])}</span>`));
+    const w = wx[cur];
+    if (w && w.rise) badges.push(`<span class="badge">🌅 ${esc(w.rise)} · 🌇 ${esc(w.set)}</span>`);
+  }
+  const chips = (R.buchungen || []).filter((b) => b.von && cur >= b.von && cur <= (b.bis || b.von))
+    .map((b) => `<button class="chip" data-kopie="${esc(b.wert)}">${esc(b.icon || '🎫')} ${esc(b.label)}: ${esc(b.wert)} ⧉</button>`);
+  $('hero').style.background = `var(--g-${typ}, var(--g-hotel))`;
+  return `<div class="label">${label}</div><h2>${esc(ort)}</h2><div class="meta">${meta}</div>
+    ${t && t.highlight ? `<div class="highlight">✨ ${esc(t.highlight)}</div>` : ''}
+    ${badges.length ? `<div class="badges">${badges.join('')}</div>` : ''}${chips.length ? `<div class="badges">${chips.join('')}</div>` : ''}`;
+}
+
+function ausflugHtml(a, mitDatum) {
+  const id = a.id || a.titel, eigen = (tickets[id] || {}).qr, qrs = a.qrs || [], qr = eigen || a.qr || qrs[0];
+  // Mehrere Tickets (eins pro Person): kleine QR-Kacheln, jede antippbar
+  const bild = a.noqr ? '<div class="qr-add" style="border-style:solid;font-size:2rem">🚗</div>'
+    : !eigen && qrs.length > 1 ? `<div class="qrs">${qrs.map((q, i) => `<button class="qr" style="background-image:url('${esc(q)}')" data-gross="${esc(id)}-${i}" aria-label="Ticket ${i + 1} groß anzeigen"><span class="qr-n">${i + 1}/${qrs.length}</span></button>`).join('')}</div>`
+    : qr ?`<button class="qr" style="background-image:url('${esc(qr)}')" data-gross="${esc(id)}" aria-label="Ticket groß anzeigen"></button>`
+    : `<button class="qr-add" data-ticket="${esc(id)}">📷 Ticket-Foto mit QR-Code hinzufügen</button>`;
+  return `<div class="trip"><div>${bild}</div><div>
+    <div class="trip-title">${esc(a.titel)}</div>
+    <div class="badges" style="margin-top:6px">${mitDatum ? `<span class="badge">📅 ${esc(kurz(mitDatum))}</span>` : ''}${a.zeitText ? `<span class="badge">🕗 ${esc(a.zeitText)}</span>` : ''}${a.anbieter ? `<span class="badge">${esc(a.anbieter)}</span>` : ''}</div>
+    ${a.treff ? `<div style="margin-top:6px">📍 ${a.maps ? `<a href="${url(a.maps)}" target="_blank" rel="noopener">${esc(a.treff)}</a>` : esc(a.treff)}</div>` : ''}
+    ${a.ref ? `<div style="margin-top:6px"><button class="chip" data-kopie="${esc(a.ref)}">🎫 ${esc(a.ref)} ⧉</button></div>` : ''}
+    ${a.pdf ? `<div style="margin-top:6px"><button class="chip" data-pdf="${esc(a.pdf)}">📄 Voucher öffnen</button></div>` : ''}
+    ${(a.infos || []).length ? `<ul class="facts" style="margin-top:6px">${a.infos.map((i) => '<li>' + esc(i) + '</li>').join('')}</ul>` : ''}
+  </div></div>`;
+}
+
+function einreiseHtml(x) {
+  const k = 'er:' + x.id, fertig = erledigt[k];
+  const st = fertig ? ['ok', '✓ erledigt'] : x.bis && cur > x.bis ? ['bad', 'überfällig'] : !x.ab || cur >= x.ab ? ['warn', x.bis ? `jetzt bis ${ddmm(x.bis)}` : 'jetzt'] : ['', `ab ${ddmm(x.ab)}`];
+  return `<div class="er"><ul class="check"><li class="${fertig ? 'done' : ''}"><input type="checkbox" data-k="${esc(k)}" ${fertig ? 'checked' : ''}>
+    <div><span class="land">${esc(x.land)}</span> · ${esc(x.was)} <span class="badge ${st[0]}">${st[1]}</span>
+    <div class="note">${esc(x.info || '')}</div>
+    <div>${(x.links || []).map(([n, u]) => `<a href="${url(u)}" target="_blank" rel="noopener">${esc(n)}</a>`).join(' · ')}</div></div></li></ul></div>`;
+}
+
+function checkHtml(k, text, extra) {
+  return `<li class="${erledigt[k] ? 'done' : ''}"><input type="checkbox" data-k="${esc(k)}" ${erledigt[k] ? 'checked' : ''}><span>${esc(text)}</span>${extra || ''}</li>`;
+}
+const vorbKey = (v) => 'vb:' + (v.id || v.text);
+
+function kontaktHtml() {
+  const a = R.agentur; if (!a) return '';
+  const tel = (n) => String(n).replace(/[^+\d]/g, '');
+  return `<div><b>${esc(a.name || '')}</b>${a.ansprechpartner ? ' · ' + esc(a.ansprechpartner) : ''}</div>
+    ${a.hinweis ? `<div class="note">${esc(a.hinweis)}</div>` : ''}
+    <div>${a.telefon ? `<a class="chip" href="tel:${tel(a.telefon)}">📞 Anrufen</a>` : ''}${a.whatsapp ? `<a class="chip" href="https://wa.me/${tel(a.whatsapp).replace('+', '')}" target="_blank" rel="noopener">💬 WhatsApp</a>` : ''}${a.email ? `<a class="chip" href="mailto:${esc(a.email)}">✉️ E-Mail</a>` : ''}</div>`;
+}
+
+function renderTag() {
+  $('pick').value = cur;
+  $('hero').innerHTML = heroHtml();
+  const t = tagFuer(cur), vor = cur < START;
+
+  // Gebuchte Ausflüge des Tages
+  const af = t ? ausflugTag(t) : [];
+  $('c-ausflug').hidden = !af.length; $('ausflug').innerHTML = af.map((a) => ausflugHtml(a)).join('');
+
+  // Einreise: was jetzt dran ist, offenes noch 2 Tage über die Frist hinaus
+  const er = (R.einreise || []).filter((x) => (!x.ab || cur >= x.ab) && (!x.bis || cur <= (erledigt['er:' + x.id] ? x.bis : plus(x.bis, 2))));
+  $('c-einreise').hidden = !er.length; $('einreise').innerHTML = er.map(einreiseHtml).join('');
+  $('n-einreise').textContent = er.length ? er.filter((x) => erledigt['er:' + x.id]).length + '/' + er.length : '';
+
+  // Vor der Reise: Checkliste bis zum Anreisetag
+  const vb = (R.vorbereitung || []).map((v) => ({ v, k: vorbKey(v) })).filter(({ v }) => cur <= START && (!v.ab || cur >= plus(v.ab, -7)));
+  $('c-vorb').hidden = !vb.length;
+  $('vorb').innerHTML = vb.map(({ v, k }) => checkHtml(k, v.text, v.bis ? ` <span class="badge ${!erledigt[k] && cur > v.bis ? 'bad' : ''}">bis ${ddmm(v.bis)}</span>` : '')).join('');
+  $('n-vorb').textContent = vb.filter(({ k }) => erledigt[k]).length + '/' + vb.length;
+
+  // Unterkunft, Weg und Infos
+  const o = [];
+  if (t && t.unterkunft) {
+    const u = t.unterkunft;
+    o.push(`<div><b>🛏 ${esc(u.name)}</b></div>${u.adresse ? `<div>📍 ${u.maps ? `<a href="${url(u.maps)}" target="_blank" rel="noopener">${esc(u.adresse)}</a>` : esc(u.adresse)}</div>` : ''}${u.telefon ? `<div>📞 <a href="tel:${esc(String(u.telefon).replace(/[^+\d]/g, ''))}">${esc(u.telefon)}</a></div>` : ''}`);
+  }
+  const zeilen = t ? [].concat((t.transfer || []).map((x) => '🚌 ' + x), t.infos || []) : [];
+  if (zeilen.length) o.push(`<ul class="facts" style="margin-top:8px">${zeilen.map((x) => '<li>' + esc(x) + '</li>').join('')}</ul>`);
+  $('c-ort').hidden = !o.length; $('ort').innerHTML = o.join('');
+  $('ort-titel').textContent = t && t.typ === 'see' ? '🌊 An Bord' : t && !t.unterkunft ? '🧭 Ablauf' : '🏨 Unterkunft & Weg';
+
+  // Sehenswürdigkeiten und Tipps; vor der Reise eine Vorschau auf den ersten Ort
+  renderSights(t ? t.orte : vor ? TAGE[0].orte : null, !t && vor);
+
+  // Notizen
+  const n = notizen[cur] || [];
+  $('notizen').innerHTML = n.map((x) => checkHtml('nz:' + x.id, x.text, `<button class="del" data-del="${esc(x.id)}" aria-label="Löschen">✕</button>`)).join('');
+  $('n-notizen').textContent = n.length ? n.filter((x) => erledigt['nz:' + x.id]).length + '/' + n.length : '';
+
+  $('c-kontakt-tag').hidden = !(R.agentur && (!t || t.typ === 'anreise' || t.typ === 'abreise'));
+  $('kontakt-tag').innerHTML = kontaktHtml();
+
+  renderWetter();
+}
+
+// ---------- Sehenswürdigkeiten (Fotos aus Wikipedia, für offline zwischengespeichert) ----------
+const wikiTeile = (w) => { const [l, ...r] = w.split(':'); return [encodeURIComponent(l), encodeURIComponent(r.join(':').replace(/ /g, '_'))]; };
+const wikiUrl = (w) => { const [l, t] = wikiTeile(w); return `https://${l}.wikipedia.org/wiki/${t}`; };
+async function wikiBild(w) {
+  if (!w) return '';
+  if (w in bilder) return bilder[w];
+  const [l, t] = wikiTeile(w);
+  try {
+    const res = await fetch(`https://${l}.wikipedia.org/api/rest_v1/page/summary/${t}`);
+    if (res.status === 404) { bilder[w] = ''; store.set('bilder2', bilder); return ''; }
+    if (!res.ok) return '';
+    const j = await res.json(), o = j.originalimage;
+    bilder[w] = o && o.width <= 960 ? o.source : j.thumbnail ? j.thumbnail.source.replace(/\/\d+px-/, '/960px-') : '';
+    store.set('bilder2', bilder); return bilder[w];
+  } catch (e) { return ''; }
+}
+function renderSights(key, vorschau) {
+  const S = key && R.orte && R.orte[key];
+  $('c-sights').hidden = !S;
+  if (!S) return;
+  $('sights-titel').textContent = (vorschau ? '🗺 Vorschau: ' : '🗺 ') + S.ort;
+  $('gal').scrollLeft = 0;
+  $('gal').innerHTML = (S.sights || []).map(([top, name, tun, dist, w]) => `<div class="sight">
+    <div class="ph" data-w="${esc(w || '')}" ${w && bilder[w] ? `style="background-image:url('${esc(bilder[w])}')"` : ''}>${top ? '<span class="star">⭐ Top</span>' : ''}${dist ? `<span class="dist">📍 ${esc(dist)}</span>` : ''}</div>
+    <div class="bd"><div class="nm">${w ? `<a href="${esc(wikiUrl(w))}" target="_blank" rel="noopener">${esc(name)}</a>` : esc(name)}</div><div class="note">${esc(tun)}</div></div></div>`).join('');
+  $('tipps').innerHTML = (S.tipps || []).map((x) => '<li>💡 ' + esc(x) + '</li>').join('');
+  $('sights-note').textContent = (S.ab ? 'Entfernungen ' + S.ab + ', grobe Richtwerte. ' : '') + 'Fotos: Wikipedia.';
+  document.querySelectorAll('#gal .ph[data-w]').forEach(async (el) => {
+    const w = el.dataset.w; if (!w || bilder[w]) return;
+    const src = await wikiBild(w); if (src && el.isConnected) el.style.backgroundImage = `url('${src.replace(/'/g, '%27')}')`;
+  });
+}
+
+// ---------- Wetter (Open-Meteo): Vorhersage bis 15 Tage, sonst Vorjahreswert ----------
+const WMO = (c) => c === 0 ? ['☀️', 'Sonnig'] : c <= 2 ? ['🌤', 'Heiter'] : c === 3 ? ['☁️', 'Bewölkt'] : c <= 48 ? ['🌫', 'Nebel'] : c <= 57 ? ['🌦', 'Niesel'] : c <= 67 ? ['🌧', 'Regen'] : c <= 77 ? ['🌨', 'Schnee'] : c <= 82 ? ['🌦', 'Schauer'] : ['⛈', 'Gewitter'];
+const rnd = (v) => (v == null ? '–' : Math.round(v));
+const zeit = (s) => (s ? s.slice(11, 16) : '');
+const wxLaeuft = new Set();
+async function wxLaden(d) {
+  const L = ortFuer(d); if (L.lat == null || wxLaeuft.has(d)) return;
+  const alt = wx[d], abst = diff(isoHeute(), d), vorhersage = abst >= -60 && abst <= 15;
+  if (alt && alt.ort === L.ort && (vorhersage ? alt.quelle === 'vorhersage' && Date.now() - alt.at < 3 * 3600e3 : alt.quelle === 'vorjahr')) return;
+  if (!navigator.onLine) return;
+  wxLaeuft.add(d);
+  const q = `latitude=${L.lat}&longitude=${L.lon}&timezone=auto`;
+  try {
+    let j, quelle = 'vorhersage';
+    if (vorhersage) j = await (await fetch(`https://api.open-meteo.com/v1/forecast?${q}&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,precipitation_probability_max,uv_index_max,sunrise,sunset&start_date=${d}&end_date=${d}`)).json();
+    else {
+      quelle = 'vorjahr';
+      let ref = (Number(d.slice(0, 4)) - 1) + d.slice(4); if (ref.endsWith('-02-29')) ref = ref.slice(0, 8) + '28';
+      j = await (await fetch(`https://archive-api.open-meteo.com/v1/archive?${q}&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,precipitation_sum,sunrise,sunset&start_date=${ref}&end_date=${ref}`)).json();
+    }
+    const D = j.daily; if (!D) return;
+    wx[d] = { at: Date.now(), quelle, ort: L.ort, code: D.weather_code[0], tmax: D.temperature_2m_max[0], tmin: D.temperature_2m_min[0], fuehlt: D.apparent_temperature_max[0],
+      regen: D.precipitation_probability_max ? D.precipitation_probability_max[0] : null, mm: D.precipitation_sum ? D.precipitation_sum[0] : null, uv: D.uv_index_max ? D.uv_index_max[0] : null,
+      rise: zeit(D.sunrise[0]), set: zeit(D.sunset[0]) };
+    store.set('wetter', wx);
+    if (d === wetterTag()) { renderWetter(); $('hero').innerHTML = heroHtml(); }
+  } catch (e) {} finally { wxLaeuft.delete(d); }
+}
+function uvStufe(uv) {
+  if (uv == null) return null;
+  if (uv < 3) return ['ok', 'niedrig', 'Kein besonderer Schutz nötig.'];
+  if (uv < 6) return ['warn', 'mittel', 'Mittags Schatten, Sonnencreme, Hut.'];
+  if (uv < 8) return ['bad', 'hoch', 'Mittags in den Schatten, LSF 50, Hut und Sonnenbrille.'];
+  return ['bad', 'sehr hoch', 'Mittagssonne meiden, LSF 50 alle 2 Std. erneuern.'];
+}
+// Kinder unter 4 Jahren: Kleidung nach Temperatur (Faustregel: eine Schicht mehr als Erwachsene)
+const monateAlt = (geb, d) => { const [y, m] = String(geb).split('-').map(Number); return (Number(d.slice(0, 4)) - y) * 12 + Number(d.slice(5, 7)) - m; };
+function kleidungKind(t) {
+  if (t >= 30) return 'Nur Windel/kurzer Body oder dünnes Musselintuch, luftiger Sonnenhut, oft trinken lassen.';
+  if (t >= 25) return 'Kurzer Body, dünne lange Baumwollhose oder leichtes Kleid, Sonnenhut.';
+  if (t >= 20) return 'Body mit dünner langer Hose, leichte Jacke für morgens und abends.';
+  if (t >= 15) return 'Langarmbody, Pulli, lange Hose, Socken, dünne Mütze.';
+  if (t >= 10) return 'Pulli, gefütterte Hose oder Overall, Jacke, Mütze.';
+  return 'Warme Schichten, Schneeanzug oder Fleece-Overall, Mütze, Handschuhe.';
+}
+function kinderHtml(d, w) {
+  const kl = (R.kinder || []).filter((k) => k.geburt).map((k) => ({ ...k, m: monateAlt(k.geburt, d) })).filter((k) => k.m >= 0 && k.m < 48);
+  if (!kl.length) return '';
+  const t = w ? (w.fuehlt != null ? w.fuehlt : w.tmax) : null, tipps = [];
+  kl.forEach((k) => tipps.push(k.m < 6 ? `${k.name} (${k.m} Mon.): keine direkte Sonne, noch keine Sonnencreme – Schatten, Kleidung, Hut.`
+    : k.m < 12 ? `${k.name} (${k.m} Mon.): keine direkte Sonne, Sonnencreme nur kleinflächig, mineralisch, LSF 50+.`
+    : `${k.name} (${Math.floor(k.m / 12)} J.): mineralische Kindersonnencreme LSF 50+, alle 2 Std. erneuern.`));
+  if (t != null && t >= 28) tipps.push('Kinderwagen nie mit einem Tuch abdecken (Hitzestau).');
+  return `<div class="kids"><b>👶 Für die Kleinen</b>${t != null ? esc(kleidungKind(t)) : ''}<ul class="facts">${tipps.map((x) => '<li>' + esc(x) + '</li>').join('')}</ul></div>`;
+}
+const wetterTag = () => (cur < START ? START : cur > ENDE ? null : cur);
+function renderWetter() {
+  const d = wetterTag();
+  $('c-wetter').hidden = !d;
+  if (!d) return;
+  const w = wx[d];
+  let html = '';
+  if (!w) html = `<div class="note">${navigator.onLine ? 'Wetter wird geladen …' : 'Wetter gibt es nur mit Internet.'}</div>`;
+  else {
+    const [ic, txt] = WMO(w.code), st = uvStufe(w.uv);
+    const art = w.code <= 2 ? '' : w.code <= 48 ? 'wolken' : w.code >= 95 ? 'gewitter' : 'regen';
+    // Vorhersage: Regenwahrscheinlichkeit; Vorjahr: gefallene Menge
+    const regen = w.quelle === 'vorhersage'
+      ? `<b>${rnd(w.regen)} %</b><span>💧 Regenrisiko</span><div class="wx-bar"><i style="width:${Math.min(100, Math.max(0, w.regen || 0))}%"></i></div>`
+      : `<b>${w.mm == null ? '–' : w.mm.toFixed(1).replace('.', ',')} mm</b><span>💧 Regen</span>`;
+    html = `${d !== cur ? `<div class="note" style="margin-bottom:6px">Erster Reisetag, ${esc(w.ort)}:</div>` : ''}
+      <div class="wx ${art}"><div class="wx-ic">${ic}</div><div><div class="wx-t">${rnd(w.tmax)}°<small>/ ${rnd(w.tmin)}°</small></div><div class="wx-txt">${txt} · ${esc(w.ort)}</div></div></div>
+      <div class="wx-stats"><div class="wx-stat">${regen}</div><div class="wx-stat"><b>${rnd(w.fuehlt)}°</b><span>🌡 gefühlt</span></div>
+        ${st ? `<div class="wx-stat ${st[0]}"><b>${Math.round(w.uv)}</b><span>☀️ UV ${st[1]}</span></div>` : `<div class="wx-stat"><b>${esc(w.set || '–')}</b><span>🌇 Untergang</span></div>`}</div>
+      ${st && st[0] !== 'ok' ? `<div class="note" style="margin-top:8px">☀️ ${st[2]}</div>` : ''}
+      ${kinderHtml(d, w)}
+      <div class="note" style="margin-top:8px">${w.quelle === 'vorhersage' ? 'Vorhersage' : 'So war es am selben Tag im Vorjahr – die Vorhersage kommt ab ' + ddmm(plus(d, -15))} · Daten: <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a></div>`;
+  }
+  $('wetter').innerHTML = html;
+  wxLaden(d);
+}
+
+// ---------- Reiseplan und Unterlagen ----------
+function renderPlan() {
+  const h = isoHeute();
+  $('plan').innerHTML = TAGE.map((t) => `<tr class="row ${t.d === h ? 'today' : ''}" data-go="${esc(t.d)}"><td>${esc(kurz(t.d))}</td>
+    <td>${esc(t.ort)}${ausflugTag(t).length ? ' 🎟' : ''}<div class="note">${TYP[t.typ] || ''}</div></td><td>${esc(t.unterkunft ? t.unterkunft.name : t.typ === 'see' ? 'an Bord' : '–')}</td></tr>`).join('');
+}
+function alleAusfluege() {
+  const seen = new Set(), out = [];
+  TAGE.forEach((t) => (t.ausfluege || []).forEach((a) => { if (!seen.has(a)) { seen.add(a); out.push({ a, d: a.datum || t.d }); } }));
+  return out.sort((x, y) => (x.d < y.d ? -1 : 1));
+}
+function renderUnterlagen() {
+  $('u-kontakt-card').hidden = !R.agentur; $('u-kontakt').innerHTML = kontaktHtml();
+  const b = R.buchungen || [];
+  $('u-buchungen-card').hidden = !b.length;
+  $('u-buchungen').innerHTML = b.map((x) => `<button class="chip" data-kopie="${esc(x.wert)}">${esc(x.icon || '🎫')} ${esc(x.label)}: ${esc(x.wert)} ⧉</button>`).join('');
+  $('u-notfall-card').hidden = !(R.notfall || []).length; $('u-notfall').innerHTML = (R.notfall || []).map((x) => '<li>' + esc(x) + '</li>').join('');
+  const af = alleAusfluege();
+  $('u-ausflug-card').hidden = !af.length; $('u-ausflug').innerHTML = af.map(({ a, d }) => ausflugHtml(a, d)).join('');
+  $('u-einreise-card').hidden = !(R.einreise || []).length; $('u-einreise').innerHTML = (R.einreise || []).map(einreiseHtml).join('');
+  const vb = R.vorbereitung || [];
+  $('u-vorb-card').hidden = !vb.length;
+  $('u-vorb').innerHTML = vb.map((v) => checkHtml(vorbKey(v), v.text, v.bis ? ` <span class="badge">bis ${ddmm(v.bis)}</span>` : '')).join('');
+}
+function renderAlles() { renderTag(); renderPlan(); renderUnterlagen(); }
+
+// Für unterwegs ohne Netz: Voucher und Fotos einmal vorab laden (der Service Worker legt sie ab)
+async function vorabLaden() {
+  if (!navigator.onLine) return;
+  for (const { a } of alleAusfluege()) if (a.pdf) { try { await fetch(PW ? await voucherPfad(a.pdf) : a.pdf); } catch (e) {} }
+  for (const S of Object.values(R.orte || {})) for (const s of S.sights || []) {
+    const src = await wikiBild(s[4]); if (src) { try { await fetch(src, { mode: 'cors' }); } catch (e) {} }
+  }
+}
+
+// ---------- Bedienung ----------
+function zeigeTab(name) {
+  document.querySelectorAll('.tabs button').forEach((b) => b.setAttribute('aria-selected', b.dataset.tab === name));
+  ['tag', 'plan', 'unterlagen'].forEach((v) => ($('view-' + v).hidden = v !== name));
+  scrollTo(0, 0);
+}
+function gehe(d) { cur = d; renderTag(); zeigeTab('tag'); }
+document.querySelector('.tabs').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) zeigeTab(b.dataset.tab); });
+// Pfeile springen zum vorherigen/nächsten Tag, an dem etwas Neues ansteht (neuer Ort, Ausflug, Reisebeginn/-ende).
+// Vor der Reise sieht jeder Tag gleich aus: von heute direkt zum ersten Reisetag.
+function stichtage() {
+  const s = new Set([START, ENDE, plus(ENDE, 1)]);
+  if (isoHeute() < START) s.add(isoHeute());
+  TAGE.forEach((t) => { if (t.ersterTag) s.add(t.d); });
+  alleAusfluege().forEach(({ d }) => s.add(d));
+  return [...s].sort();
+}
+$('prev').onclick = () => gehe(stichtage().filter((d) => d < cur).pop() || cur);
+$('next').onclick = () => gehe(stichtage().find((d) => d > cur) || cur);
+$('heute').onclick = () => gehe(isoHeute());
+$('pick').onchange = (e) => e.target.value && gehe(e.target.value);
+$('plan').addEventListener('click', (e) => { const r = e.target.closest('[data-go]'); if (r) gehe(r.dataset.go); });
+document.addEventListener('change', (e) => {
+  const k = e.target.dataset && e.target.dataset.k; if (!k) return;
+  e.target.checked ? (erledigt[k] = 1) : delete erledigt[k];
+  store.set('erledigt', erledigt); renderTag(); renderUnterlagen();
+});
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-kopie],[data-ticket],[data-gross],[data-del],[data-pdf]'); if (!el) return;
+  if (el.dataset.kopie) kopieren(el.dataset.kopie);
+  else if (el.dataset.pdf) voucherZeigen(el.dataset.pdf);
+  else if (el.dataset.ticket) { ticketZiel = el.dataset.ticket; $('tix-file').value = ''; $('tix-file').click(); }
+  else if (el.dataset.gross) { const img = document.createElement('img'); img.alt = 'Ticket'; img.src = el.style.backgroundImage.slice(5, -2); overlay(img); }
+  else if (el.dataset.del) { notizen[cur] = (notizen[cur] || []).filter((x) => x.id !== el.dataset.del); store.set('notizen', notizen); renderTag(); }
+});
+$('f-add').addEventListener('submit', (e) => {
+  e.preventDefault(); const t = $('i-add').value.trim(); if (!t) return;
+  (notizen[cur] = notizen[cur] || []).push({ id: Date.now().toString(36), text: t });
+  if (!store.set('notizen', notizen)) toast('Speicher voll – Notiz nicht gespeichert');
+  $('i-add').value = ''; renderTag();
+});
+// Ticket-Foto vom Gerät: verkleinert und nur auf diesem Gerät gespeichert
+let ticketZiel = null;
+$('tix-file').addEventListener('change', (ev) => {
+  const f = ev.target.files[0]; if (!f || !ticketZiel) return;
+  const img = new Image();
+  img.onload = () => {
+    const s = Math.min(1, 800 / Math.max(img.width, img.height)), c = document.createElement('canvas');
+    c.width = Math.round(img.width * s); c.height = Math.round(img.height * s); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+    tickets[ticketZiel] = { qr: c.toDataURL('image/jpeg', 0.8) };
+    if (store.set('tickets', tickets)) toast('Ticket gespeichert – nur auf diesem Gerät');
+    else { delete tickets[ticketZiel]; toast('Speicher voll – Ticket bitte als Screenshot behalten'); }
+    URL.revokeObjectURL(img.src); renderAlles();
+  };
+  img.src = URL.createObjectURL(f);
+});
+// App wird am nächsten Morgen aus dem Hintergrund geholt: auf den neuen Tag springen
+let heuteAlt = isoHeute();
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden || !R || isoHeute() === heuteAlt) return;
+  if (cur === heuteAlt) cur = isoHeute();
+  heuteAlt = isoHeute(); renderAlles();
+});
+
+// ---------- Start ----------
+function anzeigen(r) {
+  vorbereiten(r);
+  $('login').hidden = true; $('app').hidden = false;
+  cur = isoHeute();
+  renderAlles();
+  vorabLaden();
+}
+async function start() {
+  const lokal = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  // Vorschau am PC: unverschlüsselte reise.json (wird nie hochgeladen) hat Vorrang
+  if (lokal) { try { const res = await fetch('reise.json', { cache: 'no-store' }); if (res.ok) return anzeigen(await res.json()); } catch (e) {} }
+  let huelle = null;
+  try { const res = await fetch('reise.enc.json', { cache: 'no-store' }); if (res.ok) huelle = await res.json(); } catch (e) {}
+  if (!huelle) { $('ladefehler').hidden = false; return; }
+  const gespeichert = store.get('pw', null);
+  if (gespeichert) {
+    let r = null; try { r = await entschluesseln(huelle, gespeichert); } catch (e) { store.del('pw'); }
+    if (r) { PW = gespeichert; return anzeigen(r); }
+  }
+  $('login').hidden = false;
+  $('login').addEventListener('submit', async (ev) => {
+    ev.preventDefault(); const p = pwNorm($('pw').value);
+    let r; try { r = await entschluesseln(huelle, p); } catch (e) { $('pw-err').hidden = false; return; }
+    PW = p; store.set('pw', p); anzeigen(r);
+  });
+}
+start();
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+</script>
+</body>
+</html>
